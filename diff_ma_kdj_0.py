@@ -5,6 +5,7 @@ import random
 import json
 from multiprocessing import Pool
 import datetime
+import os
 
 
 def get_codes(category = 'zz500'):
@@ -60,7 +61,10 @@ def find_save():
     ma_codes= []
     kd_codes = []
     diff_codes= []
-    filename = datetime.datetime.now().strftime( '%y-%m-%d' )+'dmd.json'
+    path = os.getcwd()
+    path_list = path.split(os.path.sep)
+    new_path = os.path.sep.join(path_list[:-1])+'/files/'
+    filename = new_path+datetime.datetime.now().strftime( '%y-%m-%d' )+'dmd.json'
     counter = 1
     code_list = get_codes('zz500')
     #code_list = random.sample(get_codes('zz500'), 100)
