@@ -61,10 +61,9 @@ def find_save():
     ma_codes= []
     kd_codes = []
     diff_codes= []
-    path = os.getcwd()
-    path_list = path.split(os.path.sep)
-    new_path = os.path.sep.join(path_list[:-1])+'/files/'
-    filename = new_path+datetime.datetime.now().strftime( '%y-%m-%d' )+'dmd.json'
+    path = os.path.dirname(os.getcwd())
+    filename = datetime.datetime.now().strftime( '%y-%m-%d' )+'dmd.json'
+    new_path = os.path.sep.join([path] + ['files']+[filename])
     counter = 1
     code_list = get_codes('zz500')
     #code_list = random.sample(get_codes('zz500'), 100)
@@ -81,8 +80,9 @@ def find_save():
         'kd_codes':kd_codes,
         'macd':diff_codes
     }
-    with open(filename,'w') as f:
+    with open(new_path,'w') as f:
         f.write(json.dumps(data))
+    print(new_path,'have been saved.')
     
 
 if __name__ == '__main__':
